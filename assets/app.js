@@ -1,35 +1,30 @@
 var app = angular.module('mysqlMonitor', []);
 
-app.controller('main', function ($scope) {
-
-	$scope.processList = {
-		data: [],
-		dateModified: null
+app.service('tableData', function () {
+	this.getBaseVariable = function () {
+		return {
+			data: [],
+			dateModified: null
+		};
 	};
+});
 
-	$scope.systemVariables = {
-		data: [],
-		dateModified: null
+app.controller('main', function ($scope, tableData) {
+
+	$scope.processList 		= tableData.getBaseVariable();
+	$scope.systemVariables 	= tableData.getBaseVariable();
+	var updateDataFn 		= function (scopePropertyName, data) {
+		$scope[scopePropertyName].data = data;
+		$scope[scopePropertyName].lastUpdated = new Date();	
 	};
 
 	var socket = io.connect("http://pfc.dev/");
 
-	socket.on("connected", function(data) {
-	    // Do stuff when we connect to the server
-	    console.log(data);
-	});
- 
 	socket.on("show-process-list", function(data) {
-	    $scope.$apply(function () {
-	    	$scope.processList.data = data;
-	    	$scope.processList.lastUpdated = new Date();
-	    });
+	    $scope.$apply(updateDataFn('processList', data));
 	});
 
 	socket.on("show-system-variables", function(data) {
-	    $scope.$apply(function () {
-	    	$scope.systemVariables.data = data;
-	    	$scope.systemVariables.lastUpdated = new Date();
-	    });
+	    $scope.$apply(updateDataFn('systemVariables', data));
 	});
 });
