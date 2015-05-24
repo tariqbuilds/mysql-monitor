@@ -2,6 +2,8 @@
 
 A simple MySQL monitoring app built with Node.js, Angular.js, & Socket.io
 
+See the [screenshots](#screenshots).
+
 ## [Download](https://github.com/afaqurk/mysql-monitor/archive/master.zip) MySQL Monitor
 * [Download link](https://github.com/afaqurk/mysql-monitor/archive/master.zip).
 * You can also clone the repo to easily get future updates by running `git pull`
