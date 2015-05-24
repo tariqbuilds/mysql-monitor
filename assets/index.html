@@ -10,13 +10,18 @@
         <script src="app.js"></script>
 
         <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cosmo/bootstrap.min.css" rel="stylesheet">
+        <style>
+        	.panel-heading i {
+        		color: white;
+        	}
+        </style>
 	</head>
 	<body ng-controller="main" class="container">
 		
-		<h1 class="text-center">NodeJS MySQL Monitor</h1>
+		<div class="page-header">
+			<h1 class="text-center">MySQL Monitor</h1>
+		</div>		
 
-		<br/>
-		<br/>
 		<div class="row">
 
 			<div class="col-md-7">
@@ -61,11 +66,16 @@
 			<div class="col-md-5">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<span class="lead">System Variables</span>
+						<span class="lead">
+							System Variables
+						</span>
+						<a target="_blank" href="https://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html">
+							<i class="glyphicon glyphicon-info-sign"></i>
+						</a>
 					</div>
 
-					<div class="input-group" ng-class="{ 'has-warning': filterText.length > 0 }">
-						<input class="form-control" ng-model="filterText"/>
+					<div class="input-group input-group-sm" ng-class="{ 'has-warning': systemVariableFilter.length > 0 }">
+						<input class="form-control" ng-model="systemVariableFilter"/>
 						<div class="input-group-addon">
 							<i class="glyphicon glyphicon-search"></i>
 						</div>
@@ -79,15 +89,23 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="variable in systemVariables.data | filter:filterText | limitTo: 5 ">
-								<td> sdvss{{ variable.Variable_name }} </td>
-								<td> sdvsdv {{ variable.Value }} </td>
+							<tr ng-repeat="variable in systemVariables.data | filter:systemVariableFilter | limitTo: 5 ">
+								<td> {{ variable.Variable_name }} </td>
+								<td> {{ variable.Value }} </td>
 							</tr>
 						</tbody>
 					</table>
 
 				</div>
 			</div>
+		</div>
+
+		<div class="text-muted text-center">
+			<a target="_blank" href="http://github.com/afaqurk/mysql-monitor">
+				Project Home Page
+			</a>
+			|
+			Disclaimer: This project is not affiliated with the MySQL product in any way. 
 		</div>
 	</body>
 </html>
