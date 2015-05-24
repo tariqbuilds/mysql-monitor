@@ -22,12 +22,3 @@ app.get('/app.js', function (req, res) {
 app.get('/', function (req, res) {
 	res.sendFile(path.resolve(__dirname + '/assets/index.html'))
 })
-
-app.get('/test', function (req, res) {
-	setTimeout(function () {
-		connection.query('SELECT * from employees.departments', function(err, rows) {
-		 	if (err) throw err
-			res.send(rows)
-		})
-	}, 3000);
-})
