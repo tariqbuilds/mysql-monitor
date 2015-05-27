@@ -3,7 +3,7 @@ app 	= express(),
 server 	= require('http').Server(app),
 path 	= require('path'),
 mysql 	= require('mysql'),
-io 		= require('socket.io')(server),
+io 	= require('socket.io')(server),
 config  = require('./config.json');
 
 server.listen(80)
