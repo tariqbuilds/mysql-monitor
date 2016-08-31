@@ -4,14 +4,14 @@ server 	= require('http').Server(app),
 path 	= require('path'),
 mysql 	= require('mysql'),
 io 	= require('socket.io')(server),
-config  = require('./config.json');
+config  = require('../config.json');
 
 server.listen(80)
 
 var connection = mysql.createConnection(config);
 connection.connect();
 
-require('./server/socketio-event-handlers')(io, connection);
+require('./socketio-event-handlers')(io, connection);
 
 app.use(express.static(path.resolve(__dirname + './assets/')))
 
